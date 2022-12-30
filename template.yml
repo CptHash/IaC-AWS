@@ -137,6 +137,8 @@ Resources:
       UserPoolName: MyUserPool
       UsernameAttributes:
         - email
+      AutoVerifiedAttributes:
+        - email
       Policies:
         PasswordPolicy:
           MinimumLength: 8
@@ -148,19 +150,15 @@ Resources:
   UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      UserPoolId: !Ref UserPool
-      GenerateSecret: false
+      ClientName: user-pool-client
+      UserPoolId:
+        Ref: UserPool
       ExplicitAuthFlows:
+        - ALLOW_ADMIN_USER_PASSWORD_AUTH
         - ALLOW_USER_PASSWORD_AUTH
         - ALLOW_REFRESH_TOKEN_AUTH
-
-  UserPoolUser:
-    Type: AWS::Cognito::UserPoolUser
-    Properties:
-      DesiredDeliveryMediums:
-        - EMAIL
-      Username: !Ref CognitoUserEmail
-      UserPoolId: !Ref UserPool
+        - ALLOW_USER_SRP_AUTH
+      GenerateSecret: false
 
   AppApi:
     DependsOn: UserPool
