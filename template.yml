@@ -18,10 +18,10 @@ Parameters:
     Type: String
 
 Resources:
-  getAllItemsFunctionNoAuth:
+  getAllArticlesFunctionNoAuth:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/get-all-items.getAllItemsHandler
+      Handler: src/handlers/get-all-articles.getAllArticlesHandler
       Runtime: nodejs18.x
       Architectures:
         - x86_64
@@ -42,10 +42,10 @@ Resources:
           Properties:
             Path: /no-auth
             Method: GET
-  getAllItemsFunction:
+  getAllArticlesFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/get-all-items.getAllItemsHandler
+      Handler: src/handlers/get-all-articles.getAllArticlesHandler
       Runtime: nodejs18.x
       Architectures:
         - x86_64
@@ -72,11 +72,11 @@ Resources:
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
-  # This is a Lambda function config associated with the source code: get-by-id.js
+  # This is a Lambda function config associated with the source code: get-article-by-id.js
   getByIdFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/get-by-id.getByIdHandler
+      Handler: src/handlers/get-article-by-id.getByIdHandler
       Runtime: nodejs18.x
       Architectures:
         - x86_64
@@ -103,11 +103,11 @@ Resources:
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
-  # This is a Lambda function config associated with the source code: put-item.js
-  putItemFunction:
+  # This is a Lambda function config associated with the source code: put-article.js
+  putArticleFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/put-item.putItemHandler
+      Handler: src/handlers/put-article.putArticleHandler
       Runtime: nodejs18.x
       Architectures:
         - x86_64
@@ -146,7 +146,7 @@ Resources:
         - AttributeDataType: String
           Name: email
           Required: false
-  
+
   UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
