@@ -1,4 +1,4 @@
-import { createResponse } from '../utils';
+import { createResponse } from '../utils/index.mjs';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 
