@@ -17,11 +17,10 @@ export const getAllArticlesHandler = async (event) => {
 
   try {
     // Get tag from queryStringParameters
-    const tag = event.queryStringParameters.tag;
-
-    if (tag) {
-      console.log("Received tag:", tag);
-    }
+	if (event && event.queryStringParameters && event.queryStringParameters.tag) {
+    	const tag = event.queryStringParameters.tag;
+      	console.log("Received tag:", tag);
+  	}
 
     // get all items from the table (only first 1MB data, you can use `LastEvaluatedKey` to get the rest of data)
     // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
