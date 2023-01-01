@@ -18,6 +18,33 @@ Parameters:
     Type: String
 
 Resources:
+  BillingAlertOne:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmActions:
+        - !Ref BillingAlertTopic
+      AlarmDescription: "Billing Alert for $10"
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: Currency
+          Value: USD
+      EvaluationPeriods: 1
+      MetricName: EstimatedCharges
+      Namespace: AWS/Billing
+      Period: 21600
+      TreatMissingData: breaching
+      Statistic: Maximum
+      Threshold: 10
+
+  BillingAlertTopic:
+    Type: AWS::SNS::Topic
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Join ['/', ['/aws/lambda', !Ref getAllArticlesFunctionNoAuth]]
+      RetentionInDays: 7
+
   getAllArticlesFunctionNoAuth:
     Type: AWS::Serverless::Function
     Properties:
