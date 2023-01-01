@@ -16,9 +16,11 @@ export const putArticleHandler = async (event) => {
   console.info('received:', event);
 
   const body = JSON.parse(event.body);
-  const id = body.id;
+
   const tag = body.tag;
   const text = body.text;
+  const title = body.title;
+  const id = makeid(64);
 
   try {
     // Creates a new item, or replaces an old item with a new item
@@ -29,6 +31,7 @@ export const putArticleHandler = async (event) => {
         id: id,
         tag: tag,
         text: text,
+        title: title,
       },
     }));
 
@@ -40,4 +43,14 @@ export const putArticleHandler = async (event) => {
 
     return createResponse(500, { msg: err }, event);
   }
+}
+
+function makeid(length) {
+  let result = '';
+  let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let charactersLength = characters.length;
+
+  for (let i = 0; i < length; i++)
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  return result;
 }
