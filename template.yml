@@ -195,6 +195,7 @@ Resources:
       StageName: !Ref APIStageName
       Cors: "'*'"
       Auth:
+        AddDefaultAuthorizerToCorsPreflight: false
         Authorizers:
             CognitoAuthorizer:
               UserPoolArn: !GetAtt "UserPool.Arn"
